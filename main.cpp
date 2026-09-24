@@ -2,15 +2,36 @@
 #include "RoboticArm.h"
 
 int main() {
-    RoboticArm arm(1.0, 2.0, 3.0);
+    // 1. Crear una instancia de la clase RoboticArm con una posición inicial
+    std::cout << "=== INICIALIZANDO ROBOTIC ARM ===\n";
+    RoboticArm myArm(0.0, 0.0, 0.0);
 
-    std::cout << "Posicion inicial: (" << arm.getX() << ", " << arm.getY() << ", " << arm.getZ() << ")\n";
+    // Mostrar estado inicial
+    std::cout << "Posicion inicial -> X: " << myArm.getX() 
+              << ", Y: " << myArm.getY() 
+              << ", Z: " << myArm.getZ() << "\n";
+    std::cout << "Sujetando objeto: " << (myArm.isHoldingObject() ? "Si" : "No") << "\n\n";
+
+    // 2. Mover el brazo a una nueva posición en el espacio 3D
+    std::cout << "=== MOVIENDO EL BRAZO ===\n";
+    myArm.move(12.5, 5.0, 3.2);
     
-    arm.move(5.5, 6.0, 2.1);
-    arm.grab();
+    std::cout << "Nueva posicion tras move() -> X: " << myArm.getX() 
+              << ", Y: " << myArm.getY() 
+              << ", Z: " << myArm.getZ() << "\n\n";
 
-    std::cout << "Nueva posicion: (" << arm.getX() << ", " << arm.getY() << ", " << arm.getZ() << ")\n";
-    std::cout << "¿Esta sujetando un objeto? " << (arm.isHoldingObject() ? "Si" : "No") << "\n";
+    // 3. Coger un objeto utilizando el método grab()
+    std::cout << "=== ACCION DE AGARRAR ===\n";
+    myArm.grab();
+    
+    std::cout << "Sujetando objeto despues de grab(): " 
+              << (myArm.isHoldingObject() ? "Si" : "No") << "\n\n";
+
+    // 4. (Opcional) Demostración de soltar el objeto para completar el ciclo
+    std::cout << "=== ACCION DE SOLTAR ===\n";
+    myArm.release();
+    std::cout << "Sujetando objeto despues de release(): " 
+              << (myArm.isHoldingObject() ? "Si" : "No") << "\n";
 
     return 0;
 }
